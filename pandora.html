@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandora Box - Jack in the Box</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .pandora-page { min-height: 100vh; padding-top: 80px; background: var(--color-bg); }
+        .pandora-map-header { text-align: center; padding: 2rem 2rem 1rem; }
+        .pandora-map-header h2 { font-family: var(--font-title); font-size: 2.5rem; color: var(--color-text); letter-spacing: 3px; }
+        .pandora-map-header p { color: var(--color-text-light); font-size: 0.9rem; letter-spacing: 2px; margin-top: 0.5rem; }
+        .pandora-map-scene { width: 100%; height: calc(100vh - 180px); background: url('../img/fondojhope.png') center/cover no-repeat; position: relative; overflow: hidden; }
+        .pandora-map-scene::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(245,230,211,0.3) 0%, rgba(245,230,211,0.1) 50%, rgba(245,230,211,0.4) 100%); z-index: 1; }
+        .pandora-box-card { position: absolute; width: 160px; padding: 1.5rem 1rem; text-align: center; text-decoration: none; border-radius: 15px; transition: all 0.4s ease; cursor: pointer; z-index: 10; animation: floatBox 4s ease-in-out infinite; }
+        .pandora-box-card:hover { transform: scale(1.15); z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .pandora-box-card .box-label { font-family: var(--font-title); font-size: 1rem; font-weight: 700; color: var(--color-text); line-height: 1.3; }
+        .pandora-box-card .box-desc { font-size: 0.75rem; color: var(--color-text-light); margin-top: 0.5rem; line-height: 1.4; }
+        .pandora-pink { top: 15%; left: 12%; background: linear-gradient(135deg, #ffe4e8, #ffd0d8); border: 2px solid #ff9eb5; animation-delay: 0s; }
+        .pandora-blue { top: 15%; right: 12%; background: linear-gradient(135deg, #e4f0ff, #d0e4ff); border: 2px solid #9ec5ff; animation-delay: 0.5s; }
+        .pandora-green { bottom: 25%; left: 8%; background: linear-gradient(135deg, #e8f5e8, #d4edda); border: 2px solid #9ec59e; animation-delay: 1s; }
+        .pandora-purple { bottom: 25%; right: 12%; background: linear-gradient(135deg, #f0e4ff, #e4d0ff); border: 2px solid #c59eff; animation-delay: 1.5s; }
+        .pandora-yellow { bottom: 8%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #fff8e4, #ffe8c0); border: 2px solid #ffc870; animation-delay: 2s; animation-name: floatBoxCenter; }
+        .pandora-yellow:hover { transform: translateX(-50%) scale(1.15); }
+        @keyframes floatBox { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes floatBoxCenter { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-12px); } }
+        .pandora-leaf { position: absolute; z-index: 5; opacity: 0.7; pointer-events: none; }
+        .pandora-leaf-tl { top: -30px; left: -30px; width: 120px; height: 100px; background: linear-gradient(135deg, #7cb342, #5a9e6f); border-radius: 0 60% 60% 60%; transform: rotate(-30deg); }
+        .pandora-leaf-tr { top: -20px; right: -20px; width: 100px; height: 90px; background: linear-gradient(135deg, #e8735a, #f4c542); border-radius: 60% 0 60% 60%; transform: rotate(30deg); }
+        .pandora-leaf-bl { bottom: -30px; left: -20px; width: 110px; height: 95px; background: linear-gradient(135deg, #4a90d9, #7cb342); border-radius: 60% 60% 60% 0; transform: rotate(120deg); }
+        .pandora-leaf-br { bottom: -20px; right: -30px; width: 115px; height: 100px; background: linear-gradient(135deg, #ff6b9d, #9c64a6); border-radius: 60% 60% 0 60%; transform: rotate(-120deg); }
+        .pandora-palm { position: absolute; width: 40px; height: 60px; background: linear-gradient(135deg, #7cb342, #5a9e6f); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; opacity: 0.5; z-index: 2; }
+        .pandora-palm-1 { top: 20%; left: 30%; transform: rotate(-15deg); }
+        .pandora-palm-2 { top: 35%; right: 25%; transform: rotate(10deg); }
+        .pandora-palm-3 { bottom: 30%; left: 35%; transform: rotate(-5deg); }
+        .pandora-palm-4 { bottom: 35%; right: 30%; transform: rotate(20deg); }
+        .pandora-palm-5 { top: 50%; left: 20%; transform: rotate(-25deg); }
+        .pandora-palm-6 { top: 45%; right: 15%; transform: rotate(15deg); }
+        .pandora-star { position: absolute; color: var(--color-yellow); font-size: 1.2rem; opacity: 0.6; z-index: 3; animation: twinkle 2s ease-in-out infinite; }
+        .pandora-star-1 { top: 10%; left: 25%; animation-delay: 0s; }
+        .pandora-star-2 { top: 25%; right: 30%; animation-delay: 0.5s; }
+        .pandora-star-3 { bottom: 15%; right: 20%; animation-delay: 1s; }
+        .pandora-star-4 { top: 40%; left: 45%; animation-delay: 1.5s; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
+        .pandora-location { padding: 1rem 2rem 2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--color-text-light); font-size: 0.9rem; font-weight: 500; }
+        .pandora-location .heart { color: var(--color-primary); font-size: 1.2rem; }
+        @media (max-width: 968px) { .pandora-box-card { width: 130px; padding: 1rem 0.8rem; } .pandora-box-card .box-label { font-size: 0.85rem; } .pandora-box-card .box-desc { font-size: 0.65rem; } .pandora-pink { left: 5%; } .pandora-blue { right: 5%; } .pandora-green { left: 3%; } .pandora-purple { right: 5%; } }
+        @media (max-width: 600px) { .pandora-map-scene { height: 70vh; } .pandora-box-card { width: 110px; padding: 0.8rem 0.6rem; } .pandora-box-card .box-label { font-size: 0.75rem; } .pandora-box-card .box-desc { font-size: 0.6rem; } .pandora-pink { top: 10%; left: 3%; } .pandora-blue { top: 10%; right: 3%; } .pandora-green { bottom: 20%; left: 2%; } .pandora-purple { bottom: 20%; right: 3%; } .pandora-yellow { bottom: 5%; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">JACK IN THE BOX</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pandora.html" class="active">Pandora</a></li>
+                <li><a href="dance.html">Dance</a></li>
+                <li><a href="art.html">Art</a></li>
+                <li><a href="amazon.html">Amazon</a></li>
+                <li><a href="hope.html">Hope</a></li>
+            </ul>
+            <a href="merch.html" class="nav-btn">Tickets</a>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <div class="pandora-page">
+        <div class="pandora-map-header">
+            <h2>ELIGE TU CAJA</h2>
+            <p>CADA CAJA GUARDA UNA PARTE DE ESTA HISTORIA</p>
+        </div>
+        <div class="pandora-map-scene">
+            <div class="pandora-leaf pandora-leaf-tl"></div>
+            <div class="pandora-leaf pandora-leaf-tr"></div>
+            <div class="pandora-leaf pandora-leaf-bl"></div>
+            <div class="pandora-leaf pandora-leaf-br"></div>
+            <div class="pandora-palm pandora-palm-1"></div>
+            <div class="pandora-palm pandora-palm-2"></div>
+            <div class="pandora-palm pandora-palm-3"></div>
+            <div class="pandora-palm pandora-palm-4"></div>
+            <div class="pandora-palm pandora-palm-5"></div>
+            <div class="pandora-palm pandora-palm-6"></div>
+            <div class="pandora-star pandora-star-1"></div>
+            <div class="pandora-star pandora-star-2"></div>
+            <div class="pandora-star pandora-star-3"></div>
+            <div class="pandora-star pandora-star-4"></div>
+            <a href="pandora.html" class="pandora-box-card pandora-pink">
+                <div class="box-label">PANDORA BOX</div>
+                <div class="box-desc">ENFRENTA<br>Y LIBERA</div>
+            </a>
+            <a href="dance.html" class="pandora-box-card pandora-blue">
+                <div class="box-label">DANCE BOX</div>
+                <div class="box-desc">BAILA.<br>SIENTE.<br>LIBÉRATE.</div>
+            </a>
+            <a href="amazon.html" class="pandora-box-card pandora-green">
+                <div class="box-label">AMAZON BOX</div>
+                <div class="box-desc">IQUITOS.<br>CULTURA.<br>NATURALEZA.</div>
+            </a>
+            <a href="art.html" class="pandora-box-card pandora-purple">
+                <div class="box-label">ART BOX</div>
+                <div class="box-desc">CREA.<br>EXPRESA.<br>INSPIRA.</div>
+            </a>
+            <a href="hope.html" class="pandora-box-card pandora-yellow">
+                <div class="box-label">HOPE BOX</div>
+                <div class="box-desc">MENSAJES PARA<br>TU CORAZÓN</div>
+            </a>
+        </div>
+        <div class="pandora-location">
+            <span>IQUITOS</span><span>PERÚ</span><span class="heart">♡</span>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-item"><span class="footer-icon"></span><span>Fecha próximamente</span></div>
+                <div class="footer-item"><span class="footer-icon">📍</span><span>Lugar: Iquitos, Perú</span></div>
+                <div class="footer-item"><span class="footer-icon">⭐</span><span>Experiencia: Arte • Baile • Amazonía • Esperanza</span></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 Jack in the Box - Hope in the Jungle. Todos los derechos reservados.</p></div>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
