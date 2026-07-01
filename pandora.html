@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Ôªø<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,90 +7,46 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); overflow-x: hidden; }
-        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(245, 230, 211, 0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; position: relative; }
-        .nav-logo { font-family: var(--font-title); font-size: 1.2rem; font-weight: 700; color: var(--color-text); text-decoration: none; }
-        .nav-menu { display: flex; list-style: none; gap: 2rem; }
-        .nav-menu a { text-decoration: none; color: var(--color-text-light); font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-        .nav-menu a:hover, .nav-menu a.active { color: var(--color-primary); font-weight: 600; }
-        .nav-btn { background: var(--color-primary); color: white; padding: 0.5rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; }
-        .nav-btn:hover { background: var(--color-primary-dark); transform: translateY(-2px); }
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-        .hamburger span { width: 25px; height: 3px; background: var(--color-text); border-radius: 3px; transition: 0.3s; }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-        .nav-menu.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(245, 230, 211, 0.98); backdrop-filter: blur(10px); padding: 1rem 2rem; gap: 1rem; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
         .pandora-page { min-height: 100vh; padding-top: 80px; background: var(--color-bg); }
         .pandora-map-header { text-align: center; padding: 2rem 2rem 1rem; }
-        .pandora-map-header h2 { font-family: var(--font-title); font-size: 2.8rem; color: var(--color-text); letter-spacing: 4px; }
-        .pandora-map-header p { color: var(--color-text-light); font-size: 0.95rem; letter-spacing: 2px; margin-top: 0.5rem; }
-        .pandora-map-scene { width: 100%; height: calc(100vh - 200px); background: url('img/fondojhope.png') center/cover no-repeat; position: relative; overflow: hidden; }
-        .pandora-map-scene::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(245,230,211,0.2) 0%, rgba(245,230,211,0.05) 50%, rgba(245,230,211,0.3) 100%); z-index: 1; }
-        .pandora-box-card { position: absolute; width: 180px; padding: 1.8rem 1.2rem; text-align: center; text-decoration: none; border-radius: 18px; transition: all 0.4s ease; cursor: pointer; z-index: 10; animation: floatBox 4s ease-in-out infinite; }
-        .pandora-box-card:hover { transform: scale(1.18); z-index: 20; box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
-        .pandora-box-card .box-label { font-family: var(--font-title); font-size: 1.1rem; font-weight: 700; color: var(--color-text); line-height: 1.3; }
-        .pandora-box-card .box-desc { font-size: 0.8rem; color: var(--color-text-light); margin-top: 0.6rem; line-height: 1.4; }
-        .pandora-pink { top: 12%; left: 10%; background: linear-gradient(135deg, #ffe4e8, #ffd0d8); border: 2px solid #ff9eb5; animation-delay: 0s; }
-        .pandora-blue { top: 12%; right: 10%; background: linear-gradient(135deg, #e4f0ff, #d0e4ff); border: 2px solid #9ec5ff; animation-delay: 0.5s; }
-        .pandora-green { bottom: 22%; left: 6%; background: linear-gradient(135deg, #e8f5e8, #d4edda); border: 2px solid #9ec59e; animation-delay: 1s; }
-        .pandora-purple { bottom: 22%; right: 10%; background: linear-gradient(135deg, #f0e4ff, #e4d0ff); border: 2px solid #c59eff; animation-delay: 1.5s; }
-        .pandora-yellow { bottom: 6%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #fff8e4, #ffe8c0); border: 2px solid #ffc870; animation-delay: 2s; animation-name: floatBoxCenter; }
-        .pandora-yellow:hover { transform: translateX(-50%) scale(1.18); }
-        @keyframes floatBox { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        @keyframes floatBoxCenter { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-15px); } }
-        .pandora-leaf { position: absolute; z-index: 5; opacity: 0.6; pointer-events: none; }
-        .pandora-leaf-tl { top: -40px; left: -40px; width: 140px; height: 120px; background: linear-gradient(135deg, #7cb342, #5a9e6f); border-radius: 0 60% 60% 60%; transform: rotate(-30deg); }
-        .pandora-leaf-tr { top: -30px; right: -30px; width: 120px; height: 110px; background: linear-gradient(135deg, #e8735a, #f4c542); border-radius: 60% 0 60% 60%; transform: rotate(30deg); }
-        .pandora-leaf-bl { bottom: -40px; left: -30px; width: 130px; height: 115px; background: linear-gradient(135deg, #4a90d9, #7cb342); border-radius: 60% 60% 60% 0; transform: rotate(120deg); }
-        .pandora-leaf-br { bottom: -30px; right: -40px; width: 135px; height: 120px; background: linear-gradient(135deg, #ff6b9d, #9c64a6); border-radius: 60% 60% 0 60%; transform: rotate(-120deg); }
-        .pandora-palm { position: absolute; width: 50px; height: 70px; background: linear-gradient(135deg, #7cb342, #5a9e6f); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; opacity: 0.4; z-index: 2; }
-        .pandora-palm-1 { top: 18%; left: 28%; transform: rotate(-15deg); }
-        .pandora-palm-2 { top: 32%; right: 22%; transform: rotate(10deg); }
-        .pandora-palm-3 { bottom: 28%; left: 32%; transform: rotate(-5deg); }
-        .pandora-palm-4 { bottom: 32%; right: 28%; transform: rotate(20deg); }
-        .pandora-palm-5 { top: 48%; left: 18%; transform: rotate(-25deg); }
-        .pandora-palm-6 { top: 42%; right: 12%; transform: rotate(15deg); }
-        .pandora-star { position: absolute; color: var(--color-yellow); font-size: 1.4rem; opacity: 0.5; z-index: 3; animation: twinkle 2s ease-in-out infinite; }
-        .pandora-star-1 { top: 8%; left: 22%; animation-delay: 0s; }
-        .pandora-star-2 { top: 22%; right: 28%; animation-delay: 0.5s; }
-        .pandora-star-3 { bottom: 12%; right: 18%; animation-delay: 1s; }
-        .pandora-star-4 { top: 38%; left: 42%; animation-delay: 1.5s; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.3); } }
+        .pandora-map-header h2 { font-family: var(--font-title); font-size: 2.5rem; color: var(--color-text); letter-spacing: 3px; }
+        .pandora-map-header p { color: var(--color-text-light); font-size: 0.9rem; letter-spacing: 2px; margin-top: 0.5rem; }
+        .pandora-map-scene { width: 100%; height: calc(100vh - 180px); background: url('../img/fondojhope.png') center/cover no-repeat; position: relative; overflow: hidden; }
+        .pandora-map-scene::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(245,230,211,0.3) 0%, rgba(245,230,211,0.1) 50%, rgba(245,230,211,0.4) 100%); z-index: 1; }
+        .pandora-box-card { position: absolute; width: 160px; padding: 1.5rem 1rem; text-align: center; text-decoration: none; border-radius: 15px; transition: all 0.4s ease; cursor: pointer; z-index: 10; animation: floatBox 4s ease-in-out infinite; }
+        .pandora-box-card:hover { transform: scale(1.15); z-index: 20; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .pandora-box-card .box-label { font-family: var(--font-title); font-size: 1rem; font-weight: 700; color: var(--color-text); line-height: 1.3; }
+        .pandora-box-card .box-desc { font-size: 0.75rem; color: var(--color-text-light); margin-top: 0.5rem; line-height: 1.4; }
+        .pandora-pink { top: 15%; left: 12%; background: linear-gradient(135deg, #ffe4e8, #ffd0d8); border: 2px solid #ff9eb5; animation-delay: 0s; }
+        .pandora-blue { top: 15%; right: 12%; background: linear-gradient(135deg, #e4f0ff, #d0e4ff); border: 2px solid #9ec5ff; animation-delay: 0.5s; }
+        .pandora-green { bottom: 25%; left: 8%; background: linear-gradient(135deg, #e8f5e8, #d4edda); border: 2px solid #9ec59e; animation-delay: 1s; }
+        .pandora-purple { bottom: 25%; right: 12%; background: linear-gradient(135deg, #f0e4ff, #e4d0ff); border: 2px solid #c59eff; animation-delay: 1.5s; }
+        .pandora-yellow { bottom: 8%; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #fff8e4, #ffe8c0); border: 2px solid #ffc870; animation-delay: 2s; animation-name: floatBoxCenter; }
+        .pandora-yellow:hover { transform: translateX(-50%) scale(1.15); }
+        @keyframes floatBox { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes floatBoxCenter { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-12px); } }
+        .pandora-leaf { position: absolute; z-index: 5; opacity: 0.7; pointer-events: none; }
+        .pandora-leaf-tl { top: -30px; left: -30px; width: 120px; height: 100px; background: linear-gradient(135deg, #7cb342, #5a9e6f); border-radius: 0 60% 60% 60%; transform: rotate(-30deg); }
+        .pandora-leaf-tr { top: -20px; right: -20px; width: 100px; height: 90px; background: linear-gradient(135deg, #e8735a, #f4c542); border-radius: 60% 0 60% 60%; transform: rotate(30deg); }
+        .pandora-leaf-bl { bottom: -30px; left: -20px; width: 110px; height: 95px; background: linear-gradient(135deg, #4a90d9, #7cb342); border-radius: 60% 60% 60% 0; transform: rotate(120deg); }
+        .pandora-leaf-br { bottom: -20px; right: -30px; width: 115px; height: 100px; background: linear-gradient(135deg, #ff6b9d, #9c64a6); border-radius: 60% 60% 0 60%; transform: rotate(-120deg); }
+        .pandora-palm { position: absolute; width: 40px; height: 60px; background: linear-gradient(135deg, #7cb342, #5a9e6f); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; opacity: 0.5; z-index: 2; }
+        .pandora-palm-1 { top: 20%; left: 30%; transform: rotate(-15deg); }
+        .pandora-palm-2 { top: 35%; right: 25%; transform: rotate(10deg); }
+        .pandora-palm-3 { bottom: 30%; left: 35%; transform: rotate(-5deg); }
+        .pandora-palm-4 { bottom: 35%; right: 30%; transform: rotate(20deg); }
+        .pandora-palm-5 { top: 50%; left: 20%; transform: rotate(-25deg); }
+        .pandora-palm-6 { top: 45%; right: 15%; transform: rotate(15deg); }
+        .pandora-star { position: absolute; color: var(--color-yellow); font-size: 1.2rem; opacity: 0.6; z-index: 3; animation: twinkle 2s ease-in-out infinite; }
+        .pandora-star-1 { top: 10%; left: 25%; animation-delay: 0s; }
+        .pandora-star-2 { top: 25%; right: 30%; animation-delay: 0.5s; }
+        .pandora-star-3 { bottom: 15%; right: 20%; animation-delay: 1s; }
+        .pandora-star-4 { top: 40%; left: 45%; animation-delay: 1.5s; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.3); } }
         .pandora-location { padding: 1rem 2rem 2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--color-text-light); font-size: 0.9rem; font-weight: 500; }
         .pandora-location .heart { color: var(--color-primary); font-size: 1.2rem; }
-        .footer { background: var(--color-text); color: white; padding: 3rem 2rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; }
-        .footer-info { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 2rem; }
-        .footer-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
-        .footer-icon { font-size: 1.2rem; }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); }
-        @media (max-width: 968px) {
-            .nav-menu { display: none; }
-            .hamburger { display: flex; }
-            .nav-btn { display: none; }
-            .pandora-box-card { width: 140px; padding: 1.2rem 0.8rem; }
-            .pandora-box-card .box-label { font-size: 0.9rem; }
-            .pandora-box-card .box-desc { font-size: 0.7rem; }
-            .pandora-pink { left: 4%; }
-            .pandora-blue { right: 4%; }
-            .pandora-green { left: 2%; }
-            .pandora-purple { right: 4%; }
-        }
-        @media (max-width: 600px) {
-            .pandora-map-scene { height: 65vh; }
-            .pandora-box-card { width: 120px; padding: 1rem 0.6rem; }
-            .pandora-box-card .box-label { font-size: 0.8rem; }
-            .pandora-box-card .box-desc { font-size: 0.65rem; }
-            .pandora-pink { top: 8%; left: 2%; }
-            .pandora-blue { top: 8%; right: 2%; }
-            .pandora-green { bottom: 18%; left: 1%; }
-            .pandora-purple { bottom: 18%; right: 2%; }
-            .pandora-yellow { bottom: 3%; }
-            .pandora-map-header h2 { font-size: 2rem; }
-        }
+        @media (max-width: 968px) { .pandora-box-card { width: 130px; padding: 1rem 0.8rem; } .pandora-box-card .box-label { font-size: 0.85rem; } .pandora-box-card .box-desc { font-size: 0.65rem; } .pandora-pink { left: 5%; } .pandora-blue { right: 5%; } .pandora-green { left: 3%; } .pandora-purple { right: 5%; } }
+        @media (max-width: 600px) { .pandora-map-scene { height: 70vh; } .pandora-box-card { width: 110px; padding: 0.8rem 0.6rem; } .pandora-box-card .box-label { font-size: 0.75rem; } .pandora-box-card .box-desc { font-size: 0.6rem; } .pandora-pink { top: 10%; left: 3%; } .pandora-blue { top: 10%; right: 3%; } .pandora-green { bottom: 20%; left: 2%; } .pandora-purple { bottom: 20%; right: 3%; } .pandora-yellow { bottom: 5%; } }
     </style>
 </head>
 <body>
@@ -125,17 +81,17 @@
             <div class="pandora-palm pandora-palm-4"></div>
             <div class="pandora-palm pandora-palm-5"></div>
             <div class="pandora-palm pandora-palm-6"></div>
-            <div class="pandora-star pandora-star-1">?</div>
-            <div class="pandora-star pandora-star-2">?</div>
-            <div class="pandora-star pandora-star-3">?</div>
-            <div class="pandora-star pandora-star-4">?</div>
+            <div class="pandora-star pandora-star-1"></div>
+            <div class="pandora-star pandora-star-2"></div>
+            <div class="pandora-star pandora-star-3"></div>
+            <div class="pandora-star pandora-star-4"></div>
             <a href="pandora.html" class="pandora-box-card pandora-pink">
                 <div class="box-label">PANDORA BOX</div>
                 <div class="box-desc">ENFRENTA<br>Y LIBERA</div>
             </a>
             <a href="dance.html" class="pandora-box-card pandora-blue">
                 <div class="box-label">DANCE BOX</div>
-                <div class="box-desc">BAILA.<br>SIENTE.<br>LIB…RATE.</div>
+                <div class="box-desc">BAILA.<br>SIENTE.<br>LIB√âRATE.</div>
             </a>
             <a href="amazon.html" class="pandora-box-card pandora-green">
                 <div class="box-label">AMAZON BOX</div>
@@ -147,21 +103,21 @@
             </a>
             <a href="hope.html" class="pandora-box-card pandora-yellow">
                 <div class="box-label">HOPE BOX</div>
-                <div class="box-desc">MENSAJES PARA<br>TU CORAZ”N</div>
+                <div class="box-desc">MENSAJES PARA<br>TU CORAZ√ìN</div>
             </a>
         </div>
         <div class="pandora-location">
-            <span>IQUITOS</span><span>PER⁄</span><span class="heart">?</span>
+            <span>IQUITOS</span><span>PER√ö</span><span class="heart">‚ô°</span>
         </div>
     </div>
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
-                <div class="footer-item"><span class="footer-icon"></span><span>Fecha prÛximamente</span></div>
-                <div class="footer-item"><span class="footer-icon">??</span><span>Lugar: Iquitos, Per˙</span></div>
-                <div class="footer-item"><span class="footer-icon">?</span><span>Experiencia: Arte ï Baile ï AmazonÌa ï Esperanza</span></div>
+                <div class="footer-item"><span class="footer-icon"></span><span>Fecha pr√≥ximamente</span></div>
+                <div class="footer-item"><span class="footer-icon">üìç</span><span>Lugar: Iquitos, Per√∫</span></div>
+                <div class="footer-item"><span class="footer-icon">‚≠ê</span><span>Experiencia: Arte ‚Ä¢ Baile ‚Ä¢ Amazon√≠a ‚Ä¢ Esperanza</span></div>
             </div>
-            <div class="footer-bottom"><p>© 2026 Jack in the Box - Hope in the Jungle. Todos los derechos reservados.</p></div>
+            <div class="footer-bottom"><p>¬© 2026 Jack in the Box - Hope in the Jungle. Todos los derechos reservados.</p></div>
         </div>
     </footer>
     <script src="js/script.js"></script>
