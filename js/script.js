@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Magic box animation
-    const magicBox = document.querySelector('.magic-box');
+    const magicBox = document.querySelector('.magic-box-img');
     if (magicBox) {
         magicBox.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.05)';

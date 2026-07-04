@@ -15,12 +15,13 @@
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="pandora.html">Pandora</a></li>
-                <li><a href="dance.html" class="active">Dance</a></li>
+                <li><a href="music.html" class="active">Music</a></li>
                 <li><a href="art.html">Art</a></li>
                 <li><a href="amazon.html">Amazon</a></li>
                 <li><a href="hope.html">Hope</a></li>
             </ul>
             <a href="merch.html" class="nav-btn">Tickets</a>
+            <a href="#" class="nav-btn" onclick="logout(); return false;" style="background: #7a6555; margin-left: 0.5rem;">Salir</a>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -31,7 +32,7 @@
 
     <section class="page-hero dance-hero">
         <div class="page-hero-content">
-            <h1 class="page-title">Dance Box</h1>
+            <h1 class="page-title">Music Box</h1>
             <p class="page-subtitle">Baila. Siente. Libérate.</p>
             <p class="page-text">El baile es mi lenguaje</p>
         </div>
@@ -53,8 +54,8 @@
                 </div>
             </div>
             <div class="content-right">
-                <div class="illustration-box illustration-dance">
-                    <div class="box-inner"></div>
+                <div class="qr-container">
+                    <img src="img/qrjhope2.jpg" alt="QR Code" class="qr-image">
                 </div>
             </div>
         </div>
@@ -88,7 +89,7 @@
             <h2>¿Listo para bailar?</h2>
             <p>Compra tu entrada y vive esta experiencia</p>
             <div class="cta-buttons">
-                <a href="merch.html" class="btn-primary">Comprar Entrada S/ 80</a>
+                <a href="merch.html" class="btn-primary">Comprar Entrada S/ 30</a>
                 <a href="index.html" class="btn-secondary">Volver al Inicio</a>
             </div>
         </div>
@@ -116,6 +117,7 @@
         </div>
     </footer>
 
+    <script src="js/auth.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

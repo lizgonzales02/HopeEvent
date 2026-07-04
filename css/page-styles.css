@@ -295,6 +295,22 @@
     font-size: 1.1rem;
 }
 
+.qr-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    object-fit: contain;
+    background: white;
+    padding: 1rem;
+}
+
 /* Illustration Box */
 .illustration-box {
     width: 250px;
